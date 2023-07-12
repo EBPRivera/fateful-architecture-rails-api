@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorized, only: %i[auto_login]
+  before_action :authorized, only: %i[auto_login show]
 
   def create
     @user = User.create(user_params)
@@ -9,6 +9,10 @@ class UsersController < ApplicationController
     else
       render json: {error: "Invalid username or password"}
     end
+  end
+
+  def show
+    render json: @user
   end
 
   def login
