@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_11_040057) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_18_030448) do
   create_table "characters", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -24,6 +24,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_040057) do
     t.string "prowess", default: "d6"
     t.string "resilience", default: "d6"
     t.integer "stamina_limit", default: 20
+    t.integer "level", default: 1
+    t.integer "stamina_max", default: 20
+    t.integer "stamina_current", default: 20
     t.index ["user_id"], name: "index_characters_on_user_id"
   end
 
