@@ -3,9 +3,8 @@ class Character < ApplicationRecord
 
   belongs_to :user
 
-  validates :name, presence: true
-  validates :user_id, presence: true
   validates :physical, :mental, :social, :awareness, :prowess, :resilience,
             presence: true, inclusion: { in: STAT_VALUES }
-  validates :stamina_limit, presence: true
+  validates_presence_of :stamina_current, :stamina_max, :stamina_limit, :level,
+                        :name, :user_id
 end
