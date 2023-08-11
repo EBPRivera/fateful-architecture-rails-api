@@ -2,12 +2,12 @@ class UsersController < ApplicationController
   before_action :authorized, only: %i[auto_login show]
 
   def create
-    @user = User.create(user_params)
-    if @user.valid?
+    @user = User.new(user_params)
+    if @user.save
       token = encode_token({user_id: @user.id})
       render json: {user: @user, token:}
     else
-      render json: {error: "Invalid username or password"}
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
@@ -21,8 +21,11 @@ class UsersController < ApplicationController
     if @user&.authenticate(params[:password])
       token = encode_token({user_id: @user.id})
       render json: {user: @user, token:}
+    elsif @user
+      @user.errors.add :base, "Invalid username or password"
+      render json: @user.errors, status: :forbidden
     else
-      render json: {error: "Invalid username or password"}
+      render json: { user: ["User not found"] }, status: :unprocessable_entity
     end
   end
 
@@ -33,6 +36,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:username, :password)
+    params.permit(:username, :password, :password_confirmation)
   end
 end
