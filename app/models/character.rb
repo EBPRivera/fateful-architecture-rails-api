@@ -5,6 +5,6 @@ class Character < ApplicationRecord
 
   validates :physical, :mental, :social, :awareness, :prowess, :resilience,
             presence: true, inclusion: { in: STAT_VALUES }
-  validates_presence_of :stamina_current, :stamina_max, :stamina_limit, :level,
+  validates_presence_of :stamina, :endurance, :limit, :level,
                         :name, :user_id
 end
