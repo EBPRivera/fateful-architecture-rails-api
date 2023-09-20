@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_11_060254) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_12_055640) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,6 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_060254) do
     t.integer "level", default: 1
     t.integer "endurance", default: 20
     t.integer "stamina", default: 20
+    t.integer "fate", default: 5
+    t.jsonb "connections", default: [], array: true
     t.index ["user_id"], name: "index_characters_on_user_id"
   end
 

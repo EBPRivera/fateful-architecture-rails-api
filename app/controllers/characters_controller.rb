@@ -49,6 +49,7 @@ class CharactersController < ApplicationController
   def character_params
     params.require(:character).permit(:name, :description, :level, :physical,
                                       :mental, :social, :awareness, :prowess,
-                                      :resilience, :limit, :endurance, :stamina)
+                                      :resilience, :limit, :endurance, :stamina,
+                                      :fate, connections: [:name, :description])
   end
 end
